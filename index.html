@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Digital Synapse | Intelligent Second Brain</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-brain fa-gradient"></i>
+                <span>Digital Synapse</span>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-home"></i> 대시보드</a></li>
+                    <li><a href="#"><i class="fas fa-plus-circle"></i> 빠른 캡처</a></li>
+                    <li><a href="#"><i class="fas fa-folder-tree"></i> 카테고리</a></li>
+                    <li id="nav-graph"><a href="#"><i class="fas fa-project-diagram"></i> 지식 그래프</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> 설정</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>v1.0.0 "Phase 1"</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="무엇을 찾으시나요?">
+                </div>
+                <div class="user-profile">
+                    <span class="status-dot"></span>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+
+            <section class="content-wrapper">
+                <div class="welcome-box">
+                    <h1>안녕하세요, <span>지식 탐험가님</span></h1>
+                    <p>오늘의 영감을 기록하고 연결해 보세요.</p>
+                </div>
+
+                <!-- Input Section -->
+                <div class="capture-section">
+                    <div class="input-card glass">
+                        <div class="input-tabs">
+                            <button class="tab-btn active" data-type="text"><i class="fas fa-align-left"></i>
+                                텍스트</button>
+                            <button class="tab-btn" data-type="link"><i class="fas fa-link"></i> 링크</button>
+                            <button class="tab-btn" data-type="image"><i class="fas fa-image"></i> 이미지</button>
+                        </div>
+                        <div class="input-body">
+                            <div class="category-selector">
+                                <label for="category">분야 설정:</label>
+                                <select id="category">
+                                    <option value="auto">지능형 자동 분류 (추천)</option>
+                                    <option value="finance">재무/투자</option>
+                                    <option value="pixel-rest">Pixel Rest</option>
+                                    <option value="ai-lecture">AI 강의</option>
+                                </select>
+                            </div>
+                            <input type="text" id="entry-title" placeholder="제목을 입력하세요 (선택 사항)">
+                            <textarea id="entry-content" placeholder="이곳에 내용을 입력하거나 링크를 붙여넣으세요..."></textarea>
+
+                            <div class="image-upload-area hidden" id="image-upload">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>이미지를 드래그하거나 클릭하여 업로드하세요</p>
+                                <input type="file" id="image-input" accept="image/*" hidden>
+                            </div>
+                        </div>
+                        <div class="input-footer">
+                            <div class="tags-input">
+                                <i class="fas fa-hashtag"></i>
+                                <input type="text" placeholder="태그 추가 (쉼표로 구분)">
+                            </div>
+                            <button id="save-btn" class="primary-btn">
+                                <i class="fas fa-paper-plane"></i> 시냅스 저장
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity / Dashboard -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card glass">
+                        <h3><i class="fas fa-clock"></i> 최근 활동</h3>
+                        <div class="activity-list" id="recent-activity">
+                            <div class="empty-state">
+                                <p>아직 저장된 기록이 없습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card glass">
+                        <h3><i class="fas fa-chart-pie"></i> 분야별 비중</h3>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <span>AI 강의</span>
+                                <div class="progress-bar">
+                                    <div class="fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <!-- More stats will be dynamic -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Graph View Overlay -->
+        <div id="graph-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <header class="overlay-header">
+                    <h2>지식 네트워크 시각화</h2>
+                    <button class="close-btn" id="close-graph">&times;</button>
+                </header>
+                <div id="graph-container"></div>
+            </div>
+        </div>
+    </div>
+    <script src="graph.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
