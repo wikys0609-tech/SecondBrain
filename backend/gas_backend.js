@@ -12,7 +12,7 @@
 const SPREADSHEET_ID = '1aoEv9SFB4t86N4LroV5kmRiEv_Rk8vbknkcFch66NKo';
 const ROOT_FOLDER_ID = '1y62LF9cmyTiH8GE3g8ClIhTFqAdDknA9';
 const GEMINI_API_KEY = 'AIzaSyDNf-p7d0to2CPdPGExufCRrAhQ1VbjPTc';
-const ACCESS_KEY = '1234'; // TODO: 원하는 비밀번호로 변경하세요
+const ACCESS_KEY = '6193'; // TODO: 원하는 비밀번호로 변경하세요
 
 function doPost(e) {
     try {
