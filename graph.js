@@ -41,7 +41,7 @@ class KnowledgeGraph {
             .selectAll('line')
             .data(links)
             .enter().append('line')
-            .attr('class', 'link');
+            .attr('class', d => `link ${d.type || ''}`);
 
         const node = this.g.append('g')
             .attr('class', 'nodes')
@@ -109,7 +109,23 @@ class KnowledgeGraph {
             });
         });
 
-        // 3. TODO: Process explicit wikilinks [[ ]] for direct note-to-note linking
+        // 3. Process explicit wikilinks [[ ]] for direct note-to-note linking
+        rawActivities.forEach((act, index) => {
+            const sourceId = `note-${index}`;
+            const wikilinks = act.wikilinks || [];
+
+            wikilinks.forEach(targetTitle => {
+                // Find node with matching title
+                const targetNode = nodes.find(n => n.group === 'note' && n.title === targetTitle);
+                if (targetNode) {
+                    links.push({
+                        source: sourceId,
+                        target: targetNode.id,
+                        type: 'direct'
+                    });
+                }
+            });
+        });
 
         return { nodes, links };
     }

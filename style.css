@@ -577,11 +577,87 @@ body.locked .app-container {
     stroke-opacity: 0.2;
 }
 
+.link.direct {
+    stroke: var(--accent);
+    stroke-opacity: 0.6;
+    stroke-width: 2px;
+}
+
 .node-label {
     fill: var(--text-secondary);
     font-size: 12px;
     pointer-events: none;
     font-family: 'Inter', sans-serif;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+        padding-bottom: 70px;
+        /* Space for bottom nav */
+    }
+
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        flex-direction: row;
+        padding: 0;
+        border-right: none;
+        border-top: 1px solid var(--glass-border);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidebar-header {
+        display: none;
+        /* Hide logo on mobile nav */
+    }
+
+    .nav-menu {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        padding: 0 1rem;
+    }
+
+    .nav-menu li a {
+        flex-direction: column;
+        gap: 5px;
+        font-size: 0.7rem;
+        padding: 0.5rem;
+    }
+
+    .nav-menu li a i {
+        font-size: 1.2rem;
+    }
+
+    .main-content {
+        padding: 1.5rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .input-section {
+        padding: 1.5rem;
+        margin-top: -30px;
+    }
+
+    .overlay-content {
+        width: 95%;
+        height: 95%;
+    }
+
+    .login-box {
+        width: 90%;
+        padding: 2rem;
+    }
 }
 
 .hidden {
