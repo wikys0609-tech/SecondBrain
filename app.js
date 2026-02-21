@@ -161,15 +161,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Search Functionality
+    const searchInput = document.getElementById('dashboard-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = activities.filter(act =>
+                (act.title && act.title.toLowerCase().includes(term)) ||
+                (act.content && act.content.toLowerCase().includes(term)) ||
+                (act.category && act.category.toLowerCase().includes(term))
+            );
+            renderActivities(filtered);
+        });
+    }
+
     // Recent Activity Rendering
-    function renderActivities() {
+    function renderActivities(dataToRender = activities) {
         const list = document.getElementById('recent-activity');
-        if (activities.length === 0) {
-            list.innerHTML = '<div class="empty-state"><p>아직 저장된 기록이 없습니다.</p></div>';
+        if (dataToRender.length === 0) {
+            list.innerHTML = `<div class="empty-state"><p>${searchInput.value ? '검색 결과가 없습니다.' : '아직 저장된 기록이 없습니다.'}</p></div>`;
             return;
         }
 
-        list.innerHTML = activities.map(act => `
+        list.innerHTML = dataToRender.map(act => `
             <div class="activity-item">
                 <div class="act-icon ${act.type}">
                     <i class="fas ${act.type === 'text' ? 'fa-file-alt' : act.type === 'link' ? 'fa-link' : 'fa-image'}"></i>
