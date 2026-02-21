@@ -15,7 +15,21 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
-<body>
+<body class="locked">
+    <!-- Access Control Gate -->
+    <div id="login-gate" class="overlay">
+        <div class="login-box glass">
+            <i class="fas fa-lock fa-3x fa-gradient"></i>
+            <h2>Digital Synapse</h2>
+            <p>보안을 위해 액세스 키를 입력하세요.</p>
+            <div class="login-form">
+                <input type="password" id="access-key-input" placeholder="액세스 키">
+                <button id="login-btn" class="primary-btn">잠금 해제</button>
+            </div>
+            <p id="login-error" class="error-msg hidden">키가 올바르지 않습니다.</p>
+        </div>
+    </div>
+
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">

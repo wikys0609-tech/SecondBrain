@@ -19,9 +19,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // UI State
     let currentType = 'text';
     let activities = JSON.parse(localStorage.getItem('synapse_activities') || '[]');
+    let userAccessKey = localStorage.getItem('synapse_key');
 
     // Initial Load
+    checkAccess();
     renderActivities();
+
+    // Access Control Logic
+    function checkAccess() {
+        if (userAccessKey) {
+            document.body.classList.remove('locked');
+            document.getElementById('login-gate').classList.add('hidden');
+        } else {
+            document.body.classList.add('locked');
+            document.getElementById('login-gate').classList.remove('hidden');
+        }
+    }
+
+    document.getElementById('login-btn').addEventListener('click', () => {
+        const key = document.getElementById('access-key-input').value;
+        if (key) {
+            userAccessKey = key;
+            localStorage.setItem('synapse_key', key);
+            checkAccess();
+        }
+    });
+
+    document.getElementById('access-key-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') document.getElementById('login-btn').click();
+    });
 
     // Graph Overlay Control
     navGraph.addEventListener('click', (e) => {
@@ -74,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const contentValue = entryContent.value.trim();
 
         const data = {
+            accessKey: userAccessKey, // 액세스 키 포함
             title: titleValue || (currentType === 'link' ? '웹 링크' : '새 노트'),
             content: contentValue,
             type: currentType,

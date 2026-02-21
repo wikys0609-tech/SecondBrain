@@ -458,6 +458,49 @@ body {
     color: var(--text-secondary);
 }
 
+/* Login Gate */
+body.locked .app-container {
+    filter: blur(15px);
+    pointer-events: none;
+}
+
+.login-box {
+    padding: 3rem;
+    text-align: center;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.login-box h2 {
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#access-key-input {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--glass-border);
+    padding: 0.8rem;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    outline: none;
+}
+
+.error-msg {
+    color: #ef4444;
+    font-size: 0.85rem;
+}
+
 /* Overlay System */
 .overlay {
     position: fixed;

@@ -9,13 +9,23 @@
  * 5. 웹 앱 URL을 프론트엔드의 app.js에 상수로 입력
  */
 
-const SPREADSHEET_ID = '1aoEv9SFB4t86N4LroV5kmRiEv_Rk8vbknkcFch66NKo'; // TODO: 사용자 입력 필요
-const ROOT_FOLDER_ID = '1y62LF9cmyTiH8GE3g8ClIhTFqAdDknA9'; // TODO: 사용자 입력 필요
-const GEMINI_API_KEY = 'AIzaSyDNf-p7d0to2CPdPGExufCRrAhQ1VbjPTc'; // TODO: 사용자 입력 필요
+const SPREADSHEET_ID = '1aoEv9SFB4t86N4LroV5kmRiEv_Rk8vbknkcFch66NKo';
+const ROOT_FOLDER_ID = '1y62LF9cmyTiH8GE3g8ClIhTFqAdDknA9';
+const GEMINI_API_KEY = 'AIzaSyDNf-p7d0to2CPdPGExufCRrAhQ1VbjPTc';
+const ACCESS_KEY = '1234'; // TODO: 원하는 비밀번호로 변경하세요
 
 function doPost(e) {
     try {
         const data = JSON.parse(e.postData.contents);
+
+        // 보안 검증: 액세스 키 확인
+        if (data.accessKey !== ACCESS_KEY) {
+            return ContentService.createTextOutput(JSON.stringify({
+                status: 'error',
+                message: 'Unauthorized: Invalid Access Key'
+            })).setMimeType(ContentService.MimeType.JSON);
+        }
+
         const result = processSync(data);
 
         return ContentService.createTextOutput(JSON.stringify({
@@ -69,7 +79,8 @@ function processSync(payload) {
         type,
         finalSummary,
         fileUrl || content,
-        tags.concat(aiAnalysis.tags || []).join(', ')
+        tags.concat(aiAnalysis.tags || []).join(', '),
+        (payload.wikilinks || []).join(', ') // 새로 추가된 위키링크 컬럼
     ]);
 
     return { fileUrl, summary: finalSummary, category: finalCategory };
