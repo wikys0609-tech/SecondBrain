@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navGraph = document.getElementById('nav-graph');
     const graphOverlay = document.getElementById('graph-overlay');
     const closeGraph = document.getElementById('close-graph');
+    const searchInput = document.getElementById('dashboard-search');
 
     // Configuration
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbw_zptrrJXqcMCcyUJITlrDu45pTKxq5Bq2ERcCFpYndGzdPO2yLdq0fPsjJH09Sfc3/exec';
@@ -162,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Search Functionality
-    const searchInput = document.getElementById('dashboard-search');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
